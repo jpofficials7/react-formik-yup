@@ -1,5 +1,21 @@
 import React from 'react';
 import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+const SignUpSchema = Yup.object().shape({
+  firstName: Yup.string().required('First name is required'),
+  lastName: Yup.string().required('Last name is required'),
+  gender: Yup.string().required('Gender is required'),
+  phone: Yup.number().required('Phone number is required'),
+  email: Yup.string().email('Invalid email').required('Email is required'),
+  password: Yup.string().required('Password is required').min(8, 'Password is too short - should be 8 chars minimum.'),
+  confirmPassword: Yup.string()
+    .required('Confirm Password is required')
+    .min(8, 'Password is too short - should be 8 chars minimum.')
+    .oneOf([Yup.ref('password')], 'Passwords must match'),
+  subscription: Yup.string().required('Subscription is required'),
+  termsAndConditions: Yup.boolean().oneOf([true], 'Please Accept Terms & Conditions'),
+});
 
 const SignupForm = () => {
   return (
@@ -16,28 +32,7 @@ const SignupForm = () => {
           subscription: '',
           termsAndConditions: '',
         }}
-        validate={(values) => {
-          const errors = {};
-
-          if (!values.firstName) errors.firstName = 'Required';
-          if (!values.lastName) errors.lastName = 'Required';
-          if (!values.gender) errors.gender = 'Required';
-          if (!values.email) {
-            errors.email = 'Required';
-          } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-            errors.email = 'Invalid email address';
-          }
-          if (!values.phone) errors.phone = 'Required';
-          if (!values.password) errors.password = 'Required';
-          if (!values.confirmPassword) {
-            errors.confirmPassword = 'Required';
-          } else if (values.password !== values.confirmPassword) {
-            errors.confirmPassword = 'Passwords do not match';
-          }
-          if (!values.subscription) errors.subscription = 'Required';
-          if (!values.termsAndConditions) errors.termsAndConditions = 'Required';
-          return errors;
-        }}
+        validationSchema={SignUpSchema}
         onSubmit={(values) => {
           console.log(values);
         }}>
