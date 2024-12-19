@@ -15,6 +15,11 @@ const SignUpSchema = Yup.object().shape({
     .oneOf([Yup.ref('password')], 'Passwords must match'),
   subscription: Yup.string().required('Subscription is required'),
   termsAndConditions: Yup.boolean().oneOf([true], 'Please Accept Terms & Conditions'),
+  additionalInfoFlag: Yup.boolean(),
+  additionalInfo: Yup.string().when('additionalInfoFlag', {
+    is: true,
+    then: Yup.string().required('Additional Information is required'),
+  }),
 });
 
 const SignupForm = () => {
@@ -30,7 +35,9 @@ const SignupForm = () => {
           password: '',
           confirmPassword: '',
           subscription: '',
-          termsAndConditions: '',
+          termsAndConditions: false,
+          additionalInfoFlag: false,
+          additionalInfo: '',
         }}
         validationSchema={SignUpSchema}
         onSubmit={(values) => {
@@ -194,6 +201,39 @@ const SignupForm = () => {
                 <span className="text-danger">{formik.errors.subscription}</span>
               )}
             </div>
+
+            <div className="form-group mt-2">
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="additionalInfoFlag"
+                  name="additionalInfoFlag"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.additionalInfoFlag}
+                />
+                <label className="form-check-label" htmlFor="additionalInfoFlag">
+                  Additional Information
+                </label>
+              </div>
+            </div>
+
+            {formik.values.additionalInfoFlag && (
+              <div className="form-group mt-2">
+                <label htmlFor="additionalInfo">Enter Additional Information</label>
+                <textarea
+                  className="form-control"
+                  id="additionalInfo"
+                  name="additionalInfo"
+                  onChange={formik.handleBlur}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.additionalInfo}></textarea>
+                {formik.touched.additionalInfo && formik.errors.additionalInfo && (
+                  <span className="text-danger">{formik.errors.additionalInfo}</span>
+                )}
+              </div>
+            )}
 
             <div className="form-group mt-2">
               <div className="form-check">
