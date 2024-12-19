@@ -54,7 +54,9 @@ const SignupForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.firstName}
               />
-              <span className="text-danger">{formik.errors.firstName}</span>
+              {formik.touched.firstName && formik.errors.firstName && (
+                <span className="text-danger">{formik.errors.firstName}</span>
+              )}
             </div>
             <div className="form-group mt-2">
               <label htmlFor="lastName">Last Name</label>
@@ -66,7 +68,9 @@ const SignupForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.lastName}
               />
-              <span className="text-danger">{formik.errors.lastName}</span>
+              {formik.touched.lastName && formik.errors.lastName && (
+                <span className="text-danger">{formik.errors.lastName}</span>
+              )}
             </div>
             <div className="form-group mt-2">
               <label>Gender</label>
@@ -117,7 +121,9 @@ const SignupForm = () => {
                   </label>
                 </div>
               </div>
-              <span className="text-danger">{formik.errors.gender}</span>
+              {formik.touched.gender && formik.errors.gender && (
+                <span className="text-danger">{formik.errors.gender}</span>
+              )}
             </div>
             <div className="form-group mt-2">
               <label htmlFor="email">Email</label>
@@ -129,7 +135,9 @@ const SignupForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
               />
-              <span className="text-danger">{formik.errors.email}</span>
+              {formik.touched.email && formik.errors.email && (
+                <span className="text-danger">{formik.errors.email}</span>
+              )}
             </div>
             <div className="form-group mt-2">
               <label htmlFor="phone">Phone Number</label>
@@ -141,7 +149,9 @@ const SignupForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.phone}
               />
-              <span className="text-danger">{formik.errors.phone}</span>
+              {formik.touched.phone && formik.errors.phone && (
+                <span className="text-danger">{formik.errors.phone}</span>
+              )}
             </div>
             <div className="form-group mt-2">
               <label htmlFor="password">Password</label>
@@ -153,7 +163,9 @@ const SignupForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
               />
-              <span className="text-danger">{formik.errors.password}</span>
+              {formik.touched.password && formik.errors.password && (
+                <span className="text-danger">{formik.errors.password}</span>
+              )}
             </div>
             <div className="form-group mt-2">
               <label htmlFor="confirmPassword">Confirm Password</label>
@@ -165,7 +177,9 @@ const SignupForm = () => {
                 onBlur={formik.handleBlur}
                 value={formik.values.confirmPassword}
               />
-              <span className="text-danger">{formik.errors.confirmPassword}</span>
+              {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+                <span className="text-danger">{formik.errors.confirmPassword}</span>
+              )}
             </div>
 
             <div className="form-group mt-2">
@@ -181,7 +195,9 @@ const SignupForm = () => {
                 <option value="subscription-2">Pro</option>
                 <option value="subscription-3">Enterprise</option>
               </select>
-              <span className="text-danger">{formik.errors.subscription}</span>
+              {formik.touched.subscription && formik.errors.subscription && (
+                <span className="text-danger">{formik.errors.subscription}</span>
+              )}
             </div>
 
             <div className="form-group mt-2">
@@ -197,7 +213,9 @@ const SignupForm = () => {
                 <label className="form-check-label" htmlFor="termsAndConditions">
                   Accept terms and conditions.
                 </label>
-                <span className="text-danger">{formik.errors.termsAndConditions}</span>
+                {formik.touched.termsAndConditions && formik.errors.termsAndConditions && (
+                  <span className="text-danger">{formik.errors.termsAndConditions}</span>
+                )}
               </div>
             </div>
 
